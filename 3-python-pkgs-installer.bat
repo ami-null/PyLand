@@ -7,7 +7,7 @@ set "UV_EXE=%ROOT_DIR%\uv\uv.exe"
 set "PYTHON_EXE=%ROOT_DIR%\python\python.exe"
 set "REQ_FILE=%~dp0requirements.txt"
 
-echo [3/6] Installing Python packages...
+echo Installing Python packages...
 
 :: Validation
 if not exist "%UV_EXE%" (

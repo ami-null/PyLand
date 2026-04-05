@@ -6,7 +6,7 @@ set "ROOT_DIR=%~dp0python_and_vscode"
 set "UV_DIR=%ROOT_DIR%\uv"
 set "TEMP_ZIP=%TEMP%\uv_download.zip"
 
-echo [1/6] Setting up uv...
+echo Setting up uv...
 
 :: Check if directory exists
 if exist "%UV_DIR%" (

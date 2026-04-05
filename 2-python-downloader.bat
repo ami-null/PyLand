@@ -7,7 +7,7 @@ set "UV_EXE=%ROOT_DIR%\uv\uv.exe"
 set "PYTHON_DIR=%ROOT_DIR%\python"
 set "INSTALL_TEMP=%PYTHON_DIR%\_temp_install"
 
-echo [2/6] Setting up Portable Python via uv...
+echo Setting up Portable Python via uv...
 
 :: Check if uv exists
 if not exist "%UV_EXE%" (
