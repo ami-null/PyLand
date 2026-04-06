@@ -2,7 +2,7 @@
 setlocal
 
 :: Configuration
-set "ROOT_DIR=%~dp0python_and_vscode"
+set "ROOT_DIR=%~dp0pytools"
 set "PYTHON_DIR=%ROOT_DIR%\python"
 set "SCRIPTS_DIR=%PYTHON_DIR%\Scripts"
 set "JUPYTER_EXE=%SCRIPTS_DIR%\jupyter-lab.exe"
@@ -36,7 +36,8 @@ REM echo [Workspace: %~dp0]
 
 :: Launching in the current directory
 REM "%JUPYTER_EXE%" --notebook-dir="%~dp0"
-"%JUPYTER_EXE%"
+REM "%JUPYTER_EXE%"
+start "" "%PYTHON_DIR%\python.exe" -m jupyterlab
 
 echo.
 echo Jupyter Lab is starting in your browser.
