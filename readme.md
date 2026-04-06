@@ -8,7 +8,7 @@ This project was **vibe coded using Gemini**.
 
 ## Project Structure
 
-* **`python_and_vscode/`**: The root container for all portable binaries.
+* **`pytools/`**: The root container for all portable binaries.
     * `uv/`: The `uv` executable for lightning-fast package and Python management.
     * `python/`: A "full-fat" portable Python distribution.
 * **`requirements.txt`**: Define your libraries here (e.g., `pandas`, `jupyterlab`).
