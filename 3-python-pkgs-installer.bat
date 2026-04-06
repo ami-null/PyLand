@@ -7,6 +7,8 @@ set "UV_EXE=%ROOT_DIR%\uv\uv.exe"
 set "PYTHON_EXE=%ROOT_DIR%\python\python.exe"
 set "REQ_FILE=%~dp0requirements.txt"
 
+set UV_LINK_MODE=copy
+
 echo Installing Python packages...
 
 :: Validation
