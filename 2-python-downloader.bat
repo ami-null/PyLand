@@ -40,6 +40,7 @@ echo Downloading Python %PY_VER%...
 
 :: Use UV_PYTHON_INSTALL_DIR to redirect the toolchain installation
 :: We install into a temp folder first to flatten the structure
+set UV_PYTHON_INSTALL_BIN=0
 set "UV_PYTHON_INSTALL_DIR=%INSTALL_TEMP%"
 
 "%UV_EXE%" python install %PY_VER%
@@ -52,7 +53,7 @@ if %ERRORLEVEL% neq 0 (
 )
 
 echo.
-echo Finalizing portable structure...
+REM echo Finalizing portable structure...
 
 :: uv installs into subdirectories like 'cpython-3.12.2-windows-x86_64-none'
 :: We find the python.exe and move everything in its parent folder to root\python
@@ -61,7 +62,6 @@ powershell -ExecutionPolicy Bypass -Command ^
     "if ($bin) {" ^
     "  $source = $bin.Directory.FullName;" ^
     "  Get-ChildItem -Path $source | Move-Item -Destination '%PYTHON_DIR%' -Force;" ^
-    "  Write-Host 'Python moved to %PYTHON_DIR%';" ^
     "} else {" ^
     "  Write-Error 'Could not locate python.exe in the downloaded package.';" ^
     "  exit 1;" ^
@@ -71,7 +71,8 @@ powershell -ExecutionPolicy Bypass -Command ^
 rd /s /q "%INSTALL_TEMP%"
 
 echo.
-echo Python %PY_VER% is ready at: %PYTHON_DIR%\python.exe
+echo Installed Python version:
 "%PYTHON_DIR%\python.exe" --version
+echo Python is ready at: %PYTHON_DIR%\python.exe
 
 if "%~1" neq "/nopause" pause
