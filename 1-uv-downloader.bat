@@ -10,7 +10,7 @@ echo Setting up uv...
 
 :: Check if directory exists
 if exist "%UV_DIR%" (
-    set /p "choice=The 'uv' folder already exists. Overwrite? (Y/N): "
+    set /p "choice=The 'uv' folder already exists. Overwrite and download the latest uv version? (Y/N): "
     if /i "!choice!" neq "Y" (
         echo Skipping uv download.
         exit /b 0
