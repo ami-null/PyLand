@@ -1,9 +1,7 @@
-numpy
-pandas
 jupyterlab
 jupyter-lsp
-#jupyter-lsp-python
-python-lsp-server
+python-lsp-server[all]
+numpy
 pandas
 xlrd
 openpyxl
