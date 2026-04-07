@@ -10,7 +10,7 @@ This project was **vibe coded using Gemini**.
 
 * **`pytools/`**: The root container for all portable binaries.
     * `uv/`: The `uv` executable for lightning-fast package and Python management.
-    * `python/`: A "full-fat" portable Python distribution.
+    * `python/`: A "full" portable Python distribution.
 * **`requirements.txt`**: Define your libraries here (e.g., `pandas`, `jupyterlab`).
     * *Note: Version pinning is not automated; please edit this file manually to pin specific versions.*
 
@@ -34,7 +34,8 @@ Run the scripts in order to initialize the portable folder:
 
 * **Zero Footprint:** Uses temporary session variables. Your system `PATH` remains untouched.
 * **Portable Jupyter:** Redirects `JUPYTER_CONFIG_DIR` so your settings travel with you.
-* **Full-Fat Python:** Includes a complete standard library, unlike "embeddable" zips.
+* **Full Python:** Includes a complete standard library, unlike "embeddable" zips.
+* **Aliase `pip`to `uv pip`:** So that `!pip ...` commands can be run from within Jupyter Notebook
 
 ---
 
