@@ -11,9 +11,6 @@ set "CUSTOM_SCRIPTS_DIR=%~dp0custom_scripts"
 set UV_LINK_MODE=copy
 set UV_PYTHON_INSTALL_BIN=0
 
-if not exist notebooks mkdir notebooks
-
-
 :: Environment Setup (Session Only)
 :: Prepend Python, Scripts, and uv to the PATH
 set "PATH=%CUSTOM_SCRIPTS_DIR%;%PYTHON_DIR%;%SCRIPTS_DIR%;%UV_DIR%;%PATH%"
@@ -44,6 +41,8 @@ if not exist "%UV_DIR%\uv.exe" (
     pause
     exit /b 1
 )
+
+if not exist notebooks mkdir notebooks
 
 echo ====================================================
 echo   PORTABLE SHELL ACTIVATED
