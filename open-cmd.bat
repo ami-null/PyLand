@@ -10,6 +10,7 @@ set "CUSTOM_SCRIPTS_DIR=%~dp0custom_scripts"
 
 set UV_LINK_MODE=copy
 set UV_PYTHON_INSTALL_BIN=0
+set UV_BREAK_SYSTEM_PACKAGES=true
 
 :: Environment Setup (Session Only)
 :: Prepend Python, Scripts, and uv to the PATH
