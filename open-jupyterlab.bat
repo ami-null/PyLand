@@ -6,6 +6,8 @@ set "ROOT_DIR=%~dp0pytools"
 set "PYTHON_DIR=%ROOT_DIR%\python"
 set "SCRIPTS_DIR=%PYTHON_DIR%\Scripts"
 set "JUPYTER_EXE=%SCRIPTS_DIR%\jupyter-lab.exe"
+set "UV_DIR=%ROOT_DIR%\uv"
+set "CUSTOM_SCRIPTS_DIR=%~dp0custom_scripts"
 
 :: 1. Validation
 if not exist "%JUPYTER_EXE%" (
@@ -18,7 +20,7 @@ if not exist "%JUPYTER_EXE%" (
 echo Initializing Portable Jupyter Environment...
 
 :: 2. Set Portable Paths (Current Session Only)
-set "PATH=%PYTHON_DIR%;%SCRIPTS_DIR%;%PATH%"
+set "PATH=%CUSTOM_SCRIPTS_DIR%;%PYTHON_DIR%;%SCRIPTS_DIR%;%PATH%"
 
 :: Redirect Jupyter's internal storage to our portable root
 :: This prevents Jupyter from writing to C:\Users\Name\AppData

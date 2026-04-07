@@ -6,6 +6,7 @@ set "ROOT_DIR=%~dp0pytools"
 set "PYTHON_DIR=%ROOT_DIR%\python"
 set "SCRIPTS_DIR=%PYTHON_DIR%\Scripts"
 set "UV_DIR=%ROOT_DIR%\uv"
+set "CUSTOM_SCRIPTS_DIR=%~dp0custom_scripts"
 
 :: 1. Validation
 if not exist "%PYTHON_DIR%\python.exe" (
@@ -22,7 +23,7 @@ if not exist "%UV_DIR%\uv.exe" (
 
 :: 2. Environment Setup (Session Only)
 :: Prepend Python, Scripts, and uv to the PATH
-set "PATH=%PYTHON_DIR%;%SCRIPTS_DIR%;%UV_DIR%;%PATH%"
+set "PATH=%CUSTOM_SCRIPTS_DIR%;%PYTHON_DIR%;%SCRIPTS_DIR%;%UV_DIR%;%PATH%"
 
 :: Set Python Home to ensure it stays internal
 set "PYTHONHOME=%PYTHON_DIR%"
