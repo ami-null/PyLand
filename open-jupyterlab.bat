@@ -20,7 +20,7 @@ if not exist "%JUPYTER_EXE%" (
 echo Initializing Portable Jupyter Environment...
 
 :: 2. Set Portable Paths (Current Session Only)
-set "PATH=%CUSTOM_SCRIPTS_DIR%;%PYTHON_DIR%;%SCRIPTS_DIR%;%PATH%"
+set "PATH=%CUSTOM_SCRIPTS_DIR%;%PYTHON_DIR%;%SCRIPTS_DIR%;%UV_DIR%;%PATH%"
 
 :: Redirect Jupyter's internal storage to our portable root
 :: This prevents Jupyter from writing to C:\Users\Name\AppData
