@@ -2,7 +2,7 @@
 setlocal enabledelayedexpansion
 
 :: Configuration
-set "ROOT_DIR=%~dp0pytools"
+set "ROOT_DIR=%~dp0dependencies"
 set "UV_DIR=%ROOT_DIR%\uv"
 set "TEMP_ZIP=%TEMP%\uv_download.zip"
 

@@ -2,7 +2,7 @@
 setlocal enabledelayedexpansion
 
 :: Configuration
-set "ROOT_DIR=%~dp0pytools"
+set "ROOT_DIR=%~dp0dependencies"
 set "UV_EXE=%ROOT_DIR%\uv\uv.exe"
 set "PYTHON_EXE=%ROOT_DIR%\python\python.exe"
 set "REQ_FILE=%~dp0requirements.txt"
