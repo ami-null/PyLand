@@ -12,6 +12,8 @@ set "CUSTOM_SCRIPTS_DIR=%~dp0custom_scripts"
 set UV_LINK_MODE=copy
 set UV_PYTHON_INSTALL_BIN=0
 set UV_BREAK_SYSTEM_PACKAGES=true
+set UV_SYSTEM_PYTHON=1
+set "UV_PYTHON=%PYTHON_EXE%"
 
 :: 1. Validation
 if not exist "%JUPYTER_EXE%" (
