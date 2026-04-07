@@ -18,7 +18,7 @@ set "UV_PYTHON=%PYTHON_EXE%"
 :: 1. Validation
 if not exist "%JUPYTER_EXE%" (
     echo ERROR: Jupyter Lab not found. 
-    echo Ensure 'jupyterlab' is in your requirements.txt and run 03_install_packages.bat.
+    echo Ensure 'jupyterlab' is in your requirements.txt and run 3-python-pkgs-installer.bat.
     pause
     exit /b 1
 )
