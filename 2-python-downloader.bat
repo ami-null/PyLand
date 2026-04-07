@@ -13,22 +13,21 @@ set "INSTALL_TEMP=%PYTHON_DIR%\_temp_install"
 set "UV_PYTHON_INSTALL_DIR=%INSTALL_TEMP%"
 set UV_PYTHON_INSTALL_BIN=0
 
-echo Setting up Portable Python via uv...
-
 :: Check if uv exists
 if not exist "%UV_EXE%" (
-    echo ERROR: uv.exe not found. Run 01_download_uv.bat first.
+    echo ERROR: uv.exe not found. Run 1-uv-downloader.bat first.
+    if "%~1" neq "/nopause" pause
     exit /b 1
 )
 
 :: Check if directory exists
 if exist "%PYTHON_DIR%" (
-    echo.
     echo WARNING: The 'python' folder already exists. 
     echo Redownloading will DELETE the current Python AND all its installed packages.
     set /p "choice=Confirm deletion and redownload? (Y/N): "
     if /i "!choice!" neq "Y" (
         echo Skipping Python setup.
+        if "%~1" neq "/nopause" pause
         exit /b 0
     )
     rd /s /q "%PYTHON_DIR%"
@@ -44,19 +43,17 @@ mkdir "%INSTALL_TEMP%"
 echo.
 echo Downloading Python %PY_VER%...
 
-
 "%UV_EXE%" python install %PY_VER%
 
 if %ERRORLEVEL% neq 0 (
     echo.
     echo Failed to download Python. Check your version string or internet connection.
     rd /s /q "%PYTHON_DIR%"
+    if "%~1" neq "/nopause" pause
     exit /b 1
 )
 
 echo.
-REM echo Finalizing portable structure...
-
 :: uv installs into subdirectories like 'cpython-3.12.2-windows-x86_64-none'
 :: We find the python.exe and move everything in its parent folder to root\python
 powershell -ExecutionPolicy Bypass -Command ^
