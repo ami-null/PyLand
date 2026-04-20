@@ -36,13 +36,13 @@ if exist "%PYTHON_DIR%" (
 
 :: Interactive version selection
 echo.
-set /p "PY_VER=Enter Python version (e.g., 3.12, 3.11, or 'latest'): "
+set /p "PY_VER=Enter Python version (e.g., 3.12, 3.11, or leave empty for latest): "
 
 mkdir "%PYTHON_DIR%"
 mkdir "%INSTALL_TEMP%"
 
 echo.
-echo Downloading Python %PY_VER%...
+echo Downloading Python %PY_VER%
 
 "%UV_EXE%" python install %PY_VER%
 
