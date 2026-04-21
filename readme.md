@@ -11,6 +11,7 @@ This project was **vibe coded using Gemini**.
 * **`dependencies/`**: The root directory of the environment.
     * `uv/`: The directory containing the `uv.exe` executable, used for downloading Python and Python packages.
     * `python/`: The directory containing the Python distribution.
+* **`notebooks/`**: The directory intended to contain Jupyter notebooks.
 * **`requirements.txt`**: Define your libraries here (e.g., `pandas`, `jupyterlab`).
     * *Note: Version pinning is not automated; please edit this file manually to pin specific versions.*
 
