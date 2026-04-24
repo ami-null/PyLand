@@ -57,15 +57,22 @@ if %ERRORLEVEL% neq 0 (
 echo.
 :: uv installs into subdirectories like 'cpython-3.12.2-windows-x86_64-none'
 :: We find the python.exe and move everything in its parent folder to root\python
-powershell -ExecutionPolicy Bypass -Command ^
-    "$bin = Get-ChildItem -Path '%INSTALL_TEMP%' -Filter 'python.exe' -Recurse | Select-Object -First 1;" ^
-    "if ($bin) {" ^
-    "  $source = $bin.Directory.FullName;" ^
-    "  Get-ChildItem -Path $source | Move-Item -Destination '%PYTHON_DIR%' -Force;" ^
-    "} else {" ^
-    "  Write-Error 'Could not locate python.exe in the downloaded package.';" ^
-    "  exit 1;" ^
-    "}"
+set "FOUND_PYTHON_DIR="
+for /f "delims=" %%I in ('dir /s /b "%INSTALL_TEMP%\python.exe" 2^>nul') do (
+    if not defined FOUND_PYTHON_DIR set "FOUND_PYTHON_DIR=%%~dpI"
+)
+
+if not defined FOUND_PYTHON_DIR (
+    echo Could not locate python.exe in the downloaded package.
+    exit /b 1
+)
+
+:: Move all files from the found directory
+move /Y "%FOUND_PYTHON_DIR%*" "%PYTHON_DIR%\" >nul 2>&1
+:: Move all subdirectories from the found directory
+for /d %%D in ("%FOUND_PYTHON_DIR%*") do (
+    move /Y "%%D" "%PYTHON_DIR%\" >nul 2>&1
+)
 
 :: Cleanup temp install folder
 rd /s /q "%INSTALL_TEMP%"
