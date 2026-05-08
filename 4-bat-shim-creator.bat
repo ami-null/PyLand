@@ -12,17 +12,15 @@ setlocal EnableDelayedExpansion
 :: ============================================================
 
 
-set "ROOT=%~dp0"
-set "ROOT=%ROOT:~0,-1%"
-set "PYTHON_EXE=%ROOT%\dependencies\python\python.exe"
-set "HELPER=%ROOT%\dependencies\helper_scripts\create-shims.py"
+set "ROOT_DIR=%~dp0dependencies"
+set "PYTHON_EXE=%ROOT_DIR%\python\python.exe"
+set "HELPER=%ROOT_DIR%\helper_scripts\create-shims.py"
 
 :: ── /nopause flag ────────────────────────────────────────────
 set "NOPAUSE=0"
 if /i "%~1"=="/nopause" set "NOPAUSE=1"
 
 
-:: ── Verify prerequisites ─────────────────────────────────────
 if not exist "%PYTHON_EXE%" (
     echo [ERROR] python.exe not found at: %PYTHON_EXE%
     echo         Please run 2-python-downloader.bat first.
@@ -31,7 +29,6 @@ if not exist "%PYTHON_EXE%" (
 echo [OK]   Found Python: %PYTHON_EXE%
 
 
-:: ── Run the helper ───────────────────────────────────────────
 "%PYTHON_EXE%" "%HELPER%"
 if errorlevel 1 (
     echo.
@@ -41,7 +38,7 @@ if errorlevel 1 (
 
 echo.
 echo ============================================================
-echo  Shims created successfully.
+echo  Script ran successfully.
 echo ============================================================
 goto :done
 
