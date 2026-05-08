@@ -34,6 +34,7 @@ for /f "delims=" %%U in ('call "%HELPER_SCRIPTS_DIR%\get-gh-release.bat" %GH_USE
 
 if "!DOWNLOAD_URL!"=="" (
     echo ERROR: Could not resolve direct download URL. >&2
+    if /i "%~1" neq "/nopause" pause
     exit /b 1
 )
 
@@ -44,6 +45,7 @@ curl -fSL --progress-bar -o "%TEMP_ZIP%" "!DOWNLOAD_URL!"
 if %ERRORLEVEL% neq 0 (
     echo ERROR: curl failed ^(exit code %ERRORLEVEL%^) while downloading: >&2
     echo        %DOWNLOAD_URL% >&2
+    if /i "%~1" neq "/nopause" pause
     exit /b 1
 )
 echo Download complete.
