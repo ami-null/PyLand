@@ -8,7 +8,7 @@ setlocal EnableDelayedExpansion
 ::  Run this after moving or renaming the root folder to create
 ::  alternative .bat shims for broken .exe shims.
 ::
-::  Usage: 4-shim-creator.bat [/nopause]
+::  Usage: 4-bat-shim-creator.bat [/nopause]
 :: ============================================================
 
 
