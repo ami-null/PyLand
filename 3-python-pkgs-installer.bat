@@ -38,7 +38,7 @@ echo Targeted Python: %PYTHON_EXE%
 
 :: Run uv pip install
 :: The --python flag tells uv exactly which environment to populate
-"%UV_EXE%" pip install --upgrade --break-system-packages -r "%REQ_FILE%" --python "%PYTHON_EXE%"
+"%UV_EXE%" pip install --upgrade --break-system-packages -r "%REQ_FILE%" --python "%PYTHON_EXE%"  --force-reinstall
 
 if %ERRORLEVEL% equ 0 (
     echo.
