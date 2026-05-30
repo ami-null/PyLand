@@ -50,7 +50,7 @@ Moving or renaming the parent folder will break the executable "shims" (the `.ex
 **The Workaround:**
 * As a workaround, instead of running the `.exe` files directly, run `python -m <module>` (e.g., `python -m jupyterlab`). This ensures the environment remains functional regardless of the folder's location.
 * Another fix is to run `4-bat-shim-creator.bat`. This creates `.bat` files for each console entry point of all the installed Python packages. These `.bat` files do not hardcode the location of the Python executable.
-* **Manual Fix:** If you really need to fix the `.exe` files in the `Scripts` folder, simply rerun `03_install_packages.bat`. This will refresh the internal paths to match the new location.
+* **Manual Fix:** If you really need to fix the `.exe` files in the `Scripts` folder, simply rerun `3-python-pkgs-installer.bat`. This will refresh the internal paths to match the new location.
 
 ---
 
