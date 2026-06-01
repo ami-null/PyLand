@@ -1,56 +1,36 @@
 @echo off
 setlocal
 
-:: Configuration
-set "ROOT_DIR=%~dp0dependencies"
-set "PYTHON_DIR=%ROOT_DIR%\python"
-set "SCRIPTS_DIR=%PYTHON_DIR%\Scripts"
+call "%~dp0_config.bat"
+
 set "JUPYTER_EXE=%SCRIPTS_DIR%\jupyter-lab.exe"
-set "UV_DIR=%ROOT_DIR%\uv"
-set "CUSTOM_SCRIPTS_DIR=%ROOT_DIR%\helper_scripts"
 
-set UV_LINK_MODE=copy
-set UV_PYTHON_INSTALL_BIN=0
-set UV_BREAK_SYSTEM_PACKAGES=true
-set UV_SYSTEM_PYTHON=1
-set "UV_PYTHON=%PYTHON_DIR%\python.exe"
-set UV_PYTHON_INSTALL_REGISTRY=0
-
-:: 1. Validation
+:: Check for jupyter-lab.exe as a proxy for whether jupyterlab is installed
 if not exist "%JUPYTER_EXE%" (
-    echo ERROR: Jupyter Lab not found. 
+    echo ERROR: Jupyter Lab not found.
     echo Ensure 'jupyterlab' is in your requirements.txt and run 3-python-pkgs-installer.bat.
+    endlocal
     pause
     exit /b 1
 )
 
 echo Initializing Portable Jupyter Environment...
 
-:: Set Portable Paths (Current Session Only)
-set "PATH=%CUSTOM_SCRIPTS_DIR%;%PYTHON_DIR%;%SCRIPTS_DIR%;%UV_DIR%;%PATH%"
-
-:: Set Python Home to ensure it stays internal
-set "PYTHONHOME=%PYTHON_DIR%"
-
-:: Redirect Jupyter's internal storage to our portable root
-:: This prevents Jupyter from writing to C:\Users\Name\AppData
-set "JUPYTER_CONFIG_DIR=%ROOT_DIR%\.jupyter_config"
-set "JUPYTER_DATA_DIR=%ROOT_DIR%\.jupyter_data"
-set "JUPYTER_RUNTIME_DIR=%ROOT_DIR%\.jupyter_runtime"
-
-:: Create these directories if they don't exist
-if not exist "%JUPYTER_CONFIG_DIR%" mkdir "%JUPYTER_CONFIG_DIR%"
-if not exist "%JUPYTER_DATA_DIR%" mkdir "%JUPYTER_DATA_DIR%"
-
+call "%~dp0_activate.bat"
 
 if not exist notebooks mkdir notebooks
 
 :: Launch Jupyter Lab
 echo Launching Jupyter Lab...
 
-:: Launching in the current directory
-"%PYTHON_DIR%\python.exe" -m jupyterlab --log-level=ERROR --notebook-dir=./notebooks
+"%PYTHON_EXE%" -m jupyterlab --log-level=ERROR --notebook-dir=./notebooks
+set "JUPYTER_EXIT=%ERRORLEVEL%"
 
 echo.
-echo Jupyter Lab exited.
+if %JUPYTER_EXIT% neq 0 (
+    echo Jupyter Lab exited with an error ^(exit code %JUPYTER_EXIT%^).
+    echo Check the output above for details.
+) else (
+    echo Jupyter Lab exited.
+)
 pause

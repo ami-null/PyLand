@@ -1,15 +1,12 @@
 @echo off
 setlocal enabledelayedexpansion
 
-:: Configuration
-set "ROOT_DIR=%~dp0dependencies"
-set "UV_EXE=%ROOT_DIR%\uv\uv.exe"
-set "PYTHON_DIR=%ROOT_DIR%\python"
+call "%~dp0_config.bat"
+
 set "INSTALL_TEMP=%PYTHON_DIR%\_temp_install"
 
-
-:: Use UV_PYTHON_INSTALL_DIR to redirect the toolchain installation
-:: We install into a temp folder first to flatten the structure
+:: Use UV_PYTHON_INSTALL_DIR to redirect the toolchain installation.
+:: We install into a temp folder first to flatten the structure.
 set "UV_PYTHON_INSTALL_DIR=%INSTALL_TEMP%"
 set UV_PYTHON_INSTALL_BIN=0
 set UV_PYTHON_INSTALL_REGISTRY=0
@@ -17,18 +14,20 @@ set UV_PYTHON_INSTALL_REGISTRY=0
 :: Check if uv exists
 if not exist "%UV_EXE%" (
     echo ERROR: uv.exe not found. Run 1-uv-downloader.bat first.
-    if "%~1" neq "/nopause" pause
+    endlocal
+    if /i "%~1" neq "/nopause" pause
     exit /b 1
 )
 
 :: Check if directory exists
 if exist "%PYTHON_DIR%" (
-    echo WARNING: The 'python' folder already exists. 
+    echo WARNING: The 'python' folder already exists.
     echo Redownloading will DELETE the current Python AND all its installed packages.
     set /p "choice=Confirm deletion and redownload? (Y/N): "
     if /i "!choice!" neq "Y" (
         echo Skipping Python setup.
-        if "%~1" neq "/nopause" pause
+        endlocal
+        if /i "%~1" neq "/nopause" pause
         exit /b 0
     )
     rd /s /q "%PYTHON_DIR%"
@@ -50,7 +49,8 @@ if %ERRORLEVEL% neq 0 (
     echo.
     echo Failed to download Python. Check your version string or internet connection.
     rd /s /q "%PYTHON_DIR%"
-    if "%~1" neq "/nopause" pause
+    endlocal
+    if /i "%~1" neq "/nopause" pause
     exit /b 1
 )
 
@@ -64,6 +64,8 @@ for /f "delims=" %%I in ('dir /s /b "%INSTALL_TEMP%\python.exe" 2^>nul') do (
 
 if not defined FOUND_PYTHON_DIR (
     echo Could not locate python.exe in the downloaded package.
+    endlocal
+    if /i "%~1" neq "/nopause" pause
     exit /b 1
 )
 
@@ -79,7 +81,8 @@ rd /s /q "%INSTALL_TEMP%"
 
 echo.
 echo Installed Python version:
-"%PYTHON_DIR%\python.exe" --version
-echo Python is ready at: %PYTHON_DIR%\python.exe
+"%PYTHON_EXE%" --version
+echo Python is ready at: %PYTHON_EXE%
 
-if "%~1" neq "/nopause" pause
+endlocal
+if /i "%~1" neq "/nopause" pause

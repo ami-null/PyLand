@@ -1,5 +1,5 @@
 @echo off
-setlocal EnableDelayedExpansion
+setlocal enabledelayedexpansion
 
 :: ============================================================
 ::  Generates relocatable .bat wrappers for all console_scripts
@@ -11,14 +11,9 @@ setlocal EnableDelayedExpansion
 ::  Usage: 4-bat-shim-creator.bat [/nopause]
 :: ============================================================
 
+call "%~dp0_config.bat"
 
-set "ROOT_DIR=%~dp0dependencies"
-set "PYTHON_EXE=%ROOT_DIR%\python\python.exe"
-set "HELPER=%ROOT_DIR%\helper_scripts\create-shims.py"
-
-:: ── /nopause flag ────────────────────────────────────────────
-set "NOPAUSE=0"
-if /i "%~1"=="/nopause" set "NOPAUSE=1"
+set "HELPER=%HELPER_SCRIPTS_DIR%\create-shims.py"
 
 
 if not exist "%PYTHON_EXE%" (
@@ -45,10 +40,12 @@ goto :done
 :error
 echo.
 echo [FAIL] The script encountered an error. See messages above.
-if "%NOPAUSE%"=="0" pause
+endlocal
+if /i "%~1" neq "/nopause" pause
 exit /b 1
 
 :done
 echo.
-if "%NOPAUSE%"=="0" pause
+endlocal
+if /i "%~1" neq "/nopause" pause
 exit /b 0

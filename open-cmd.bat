@@ -1,50 +1,24 @@
 @echo off
 setlocal
 
-:: Configuration
-set "ROOT_DIR=%~dp0dependencies"
-set "PYTHON_DIR=%ROOT_DIR%\python"
-set "SCRIPTS_DIR=%PYTHON_DIR%\Scripts"
-set "UV_DIR=%ROOT_DIR%\uv"
-set "CUSTOM_SCRIPTS_DIR=%ROOT_DIR%\helper_scripts"
-
-set UV_LINK_MODE=copy
-set UV_PYTHON_INSTALL_BIN=0
-set UV_BREAK_SYSTEM_PACKAGES=true
-set UV_SYSTEM_PYTHON=1
-set "UV_PYTHON=%PYTHON_DIR%\python.exe"
-set UV_PYTHON_INSTALL_REGISTRY=0
-
-:: Environment Setup (Session Only)
-:: Prepend Python, Scripts, and uv to the PATH
-set "PATH=%CUSTOM_SCRIPTS_DIR%;%PYTHON_DIR%;%SCRIPTS_DIR%;%UV_DIR%;%PATH%"
-
-:: Set Python Home to ensure it stays internal
-set "PYTHONHOME=%PYTHON_DIR%"
-
-:: Redirect Jupyter's internal storage to our portable root
-:: This prevents Jupyter from writing to C:\Users\Name\AppData
-set "JUPYTER_CONFIG_DIR=%ROOT_DIR%\.jupyter_config"
-set "JUPYTER_DATA_DIR=%ROOT_DIR%\.jupyter_data"
-set "JUPYTER_RUNTIME_DIR=%ROOT_DIR%\.jupyter_runtime"
-
-:: Create these directories if they don't exist
-if not exist "%JUPYTER_CONFIG_DIR%" mkdir "%JUPYTER_CONFIG_DIR%"
-if not exist "%JUPYTER_DATA_DIR%" mkdir "%JUPYTER_DATA_DIR%"
-
+call "%~dp0_config.bat"
 
 :: Validation
-if not exist "%PYTHON_DIR%\python.exe" (
+if not exist "%PYTHON_EXE%" (
     echo ERROR: Portable Python not found.
+    endlocal
     pause
     exit /b 1
 )
 
-if not exist "%UV_DIR%\uv.exe" (
+if not exist "%UV_EXE%" (
     echo ERROR: uv not found.
+    endlocal
     pause
     exit /b 1
 )
+
+call "%~dp0_activate.bat"
 
 if not exist notebooks mkdir notebooks
 
@@ -56,7 +30,6 @@ echo  uv:     %UV_DIR%
 echo ====================================================
 echo.
 
-:: 3. Launch CMD
 :: /K keeps the window open and executes the following commands
 cmd /K "echo the following tools are available: & echo. & python --version & uv --version"
 
