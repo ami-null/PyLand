@@ -1,7 +1,7 @@
 @echo off
 setlocal
 
-call "%~dp0_config.bat"
+call "%~dp0dependencies\helper_scripts\_config.bat"
 
 :: Validation
 if not exist "%PYTHON_EXE%" (
@@ -18,7 +18,7 @@ if not exist "%UV_EXE%" (
     exit /b 1
 )
 
-call "%~dp0_activate.bat"
+call "%~dp0dependencies\helper_scripts\_activate.bat"
 
 if not exist notebooks mkdir notebooks
 

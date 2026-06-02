@@ -11,7 +11,7 @@ setlocal enabledelayedexpansion
 ::  Usage: 4-bat-shim-creator.bat [/nopause]
 :: ============================================================
 
-call "%~dp0_config.bat"
+call "%~dp0dependencies\helper_scripts\_config.bat"
 
 set "HELPER=%HELPER_SCRIPTS_DIR%\create-shims.py"
 

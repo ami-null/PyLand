@@ -1,7 +1,7 @@
 @echo off
 setlocal
 
-call "%~dp0_config.bat"
+call "%~dp0dependencies\helper_scripts\_config.bat"
 
 set "JUPYTER_EXE=%SCRIPTS_DIR%\jupyter-lab.exe"
 
@@ -16,7 +16,7 @@ if not exist "%JUPYTER_EXE%" (
 
 echo Initializing Portable Jupyter Environment...
 
-call "%~dp0_activate.bat"
+call "%~dp0dependencies\helper_scripts\_activate.bat"
 
 if not exist notebooks mkdir notebooks
 
