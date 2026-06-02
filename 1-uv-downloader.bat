@@ -105,7 +105,7 @@ if exist "%TEMP_ZIP%" del /q "%TEMP_ZIP%"
 
 :: Verify whether extraction succeeded
 if "!FOUND_EXE!"=="1" if exist "%UV_EXE%" (
-    echo Extraction complete. uv successfully set up in "%UV_DIR%"
+    echo Extraction complete. Installed uv version:
     "%UV_EXE%" --version
 ) else (
     echo ERROR: Failed to extract or locate uv.exe within the archive. >&2

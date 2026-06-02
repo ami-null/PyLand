@@ -82,7 +82,6 @@ rd /s /q "%INSTALL_TEMP%"
 echo.
 echo Installed Python version:
 "%PYTHON_EXE%" --version
-echo Python is ready at: %PYTHON_EXE%
 
 endlocal
 if /i "%~1" neq "/nopause" pause
