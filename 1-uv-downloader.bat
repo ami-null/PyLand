@@ -1,7 +1,7 @@
 @echo off
 setlocal enabledelayedexpansion
 
-call "%~dp0dependencies\helper_scripts\_config.bat"
+call "%~dp0dependencies\_config.bat"
 
 set "TEMP_ZIP=%TEMP%\uv_download_latest.zip"
 set "GH_USER=astral-sh"

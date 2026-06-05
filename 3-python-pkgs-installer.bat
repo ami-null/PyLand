@@ -1,7 +1,7 @@
 @echo off
 setlocal enabledelayedexpansion
 
-call "%~dp0dependencies\helper_scripts\_config.bat"
+call "%~dp0dependencies\_config.bat"
 
 set UV_SYSTEM_PYTHON=1
 set "UV_PYTHON=%PYTHON_EXE%"

@@ -1,7 +1,7 @@
 @echo off
 setlocal enabledelayedexpansion
 
-call "%~dp0dependencies\helper_scripts\_config.bat"
+call "%~dp0dependencies\_config.bat"
 
 set "INSTALL_TEMP=%PYTHON_DIR%\_temp_install"
 
