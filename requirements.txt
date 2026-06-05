@@ -1,3 +1,4 @@
+distlib
 jupyterlab
 jupyter-lsp
 python-lsp-server[all]
