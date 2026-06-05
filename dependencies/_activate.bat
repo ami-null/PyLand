@@ -13,7 +13,7 @@ set UV_PYTHON_INSTALL_REGISTRY=0
 set PIP_BREAK_SYSTEM_PACKAGES=1
 
 :: Prepend portable tools to the PATH (session only)
-set "PATH=%HELPER_SCRIPTS_DIR%;%PYTHON_DIR%;%SCRIPTS_DIR%;%UV_DIR%;%PATH%"
+set "PATH=%PYTHON_DIR%;%HELPER_SCRIPTS_DIR%;%SCRIPTS_DIR%;%UV_DIR%;%PATH%"
 
 :: Lock Python to the portable installation
 set "PYTHONHOME=%PYTHON_DIR%"
