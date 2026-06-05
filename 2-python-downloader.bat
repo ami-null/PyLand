@@ -83,5 +83,21 @@ echo.
 echo Installed Python version:
 "%PYTHON_EXE%" --version
 
+
+
+set "SKIP_PORTABLIZE=1"
+call "%HELPER_SCRIPTS_DIR%\pip.bat" install distlib --system --break-system-packages --python "%PYTHON_EXE%" --link-mode=copy
+set "SKIP_PORTABLIZE="
+set "INSTALL_ERR=%ERRORLEVEL%"
+
+if %INSTALL_ERR% neq 0 (
+    echo.
+    echo Failed to install the distlib package. Please check the error messages above.
+    endlocal
+    if /i "%~1" neq "/nopause" pause
+    exit /b 1
+)
+
+
 endlocal
 if /i "%~1" neq "/nopause" pause
