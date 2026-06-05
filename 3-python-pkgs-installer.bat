@@ -37,7 +37,7 @@ echo Targeted Python: %PYTHON_EXE%
 
 :: Run uv pip install.
 :: The --python flag tells uv exactly which environment to populate.
-"%HELPER_SCRIPTS_DIR%\pip.bat" install --upgrade --break-system-packages -r "%REQ_FILE%"
+call "%HELPER_SCRIPTS_DIR%\pip.bat" install --upgrade --break-system-packages -r "%REQ_FILE%"
 set "INSTALL_ERR=%ERRORLEVEL%"
 
 if %INSTALL_ERR% neq 0 (
