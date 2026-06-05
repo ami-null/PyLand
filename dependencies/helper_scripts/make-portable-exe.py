@@ -5,6 +5,8 @@ import zipfile
 from io import BytesIO
 from importlib.metadata import distributions
 
+PORTABLE_MARKER = b"# PYLAND PORTABLE EXE\n"
+
 def get_launcher_stubs():
     import distlib
     distlib_dir = os.path.dirname(distlib.__file__)
@@ -12,6 +14,14 @@ def get_launcher_stubs():
     console_stub = os.path.join(distlib_dir, "t64.exe" if is_64bit else "t32.exe")
     gui_stub = os.path.join(distlib_dir, "w64.exe" if is_64bit else "w32.exe")
     return console_stub, gui_stub
+
+def is_already_converted(exe_path):
+    try:
+        with open(exe_path, "rb") as f:
+            data = f.read()
+        return PORTABLE_MARKER in data
+    except OSError:
+        return False
 
 def replace_with_portable_exes_in_scripts(verbose=False):
     print("Making portable executables of console entry points of Python packages...")
@@ -31,6 +41,7 @@ def replace_with_portable_exes_in_scripts(verbose=False):
 
     count = 0
     skipped = 0
+    up_to_date = 0
     errors = 0
 
     for dist in distributions():
@@ -56,6 +67,13 @@ def replace_with_portable_exes_in_scripts(verbose=False):
 
             exe_path = os.path.join(bindir, f"{exe_name}.exe")
             stale_path = exe_path + ".old"
+
+            # Skip if already converted
+            if os.path.exists(exe_path) and is_already_converted(exe_path):
+                if verbose:
+                    print(f"  [SKIP] Already converted -> Scripts\\{exe_name}.exe")
+                up_to_date += 1
+                continue
 
             # Move existing exe out of the way
             if os.path.exists(exe_path):
@@ -89,7 +107,7 @@ def replace_with_portable_exes_in_scripts(verbose=False):
                 with open(stub_path, "rb") as f:
                     stub_bytes = f.read()
 
-                shebang = b"#!python.exe\n"
+                shebang = b"#!python.exe\n" + PORTABLE_MARKER
                 script_bytes = script_content.encode("utf-8")
 
                 stream = BytesIO()
@@ -115,7 +133,7 @@ def replace_with_portable_exes_in_scripts(verbose=False):
                 errors += 1
                 continue
 
-    print(f"\n[DONE] Replaced: {count}  |  Skipped: {skipped}  |  Errors: {errors}")
+    print(f"[DONE] Replaced: {count}  |  Up-to-date: {up_to_date}  |  Skipped: {skipped}  |  Errors: {errors}")
 
 if __name__ == "__main__":
     verbose = "/verbose" in sys.argv
