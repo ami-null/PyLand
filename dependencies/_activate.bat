@@ -20,9 +20,9 @@ set "PYTHONHOME=%PYTHON_DIR%"
 
 :: Redirect Jupyter's internal storage into the portable root,
 :: preventing any writes to C:\Users\Name\AppData
-set "JUPYTER_CONFIG_DIR=%ROOT_DIR%\.jupyter_config"
-set "JUPYTER_DATA_DIR=%ROOT_DIR%\.jupyter_data"
-set "JUPYTER_RUNTIME_DIR=%ROOT_DIR%\.jupyter_runtime"
+set "JUPYTER_CONFIG_DIR=%ROOT_DIR%.jupyter_config"
+set "JUPYTER_DATA_DIR=%ROOT_DIR%.jupyter_data"
+set "JUPYTER_RUNTIME_DIR=%ROOT_DIR%.jupyter_runtime"
 
 if not exist "%JUPYTER_CONFIG_DIR%" mkdir "%JUPYTER_CONFIG_DIR%"
 if not exist "%JUPYTER_DATA_DIR%"   mkdir "%JUPYTER_DATA_DIR%"
