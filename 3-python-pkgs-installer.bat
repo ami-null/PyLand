@@ -18,7 +18,7 @@ if not exist "%UV_EXE%" (
 )
 
 if not exist "%PYTHON_EXE%" (
-    echo ERROR: python.exe not found in %ROOT_DIR%\python.
+    echo ERROR: python.exe not found in "%ROOT_DIR%\python".
     echo Run 2-python-downloader.bat first.
     endlocal
     if /i "%~1" neq "/nopause" pause
@@ -26,14 +26,14 @@ if not exist "%PYTHON_EXE%" (
 )
 
 if not exist "%REQ_FILE%" (
-    echo WARNING: requirements.txt not found at %REQ_FILE%.
+    echo WARNING: requirements.txt not found at "%REQ_FILE%".
     endlocal
     if /i "%~1" neq "/nopause" pause
     exit /b 1
 )
 
 echo Using uv to install packages into the portable environment...
-echo Targeted Python: %PYTHON_EXE%
+echo Targeted Python: "%PYTHON_EXE%"
 
 :: Run uv pip install.
 :: The --python flag tells uv exactly which environment to populate.
