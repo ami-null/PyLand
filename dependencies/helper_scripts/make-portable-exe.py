@@ -107,7 +107,8 @@ def replace_with_portable_exes_in_scripts(verbose=False):
                 with open(stub_path, "rb") as f:
                     stub_bytes = f.read()
 
-                shebang = b"#!python.exe\n" + PORTABLE_MARKER
+                # shebang = b"#!python.exe\n" + PORTABLE_MARKER
+                shebang = b"#!<launcher_dir>\\..\\python.exe\n" + PORTABLE_MARKER
                 script_bytes = script_content.encode("utf-8")
 
                 stream = BytesIO()
