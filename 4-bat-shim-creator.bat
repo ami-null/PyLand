@@ -8,7 +8,7 @@ setlocal enabledelayedexpansion
 ::  Run this after moving or renaming the root folder to create
 ::  alternative .bat shims for broken .exe shims.
 ::
-::  Usage: 4-bat-shim-creator.bat [/nopause]
+::  Usage: portable-bat-launcher-creator.bat [/nopause]
 :: ============================================================
 
 call "%~dp0dependencies\_config.bat"
