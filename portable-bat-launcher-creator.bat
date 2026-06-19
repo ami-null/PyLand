@@ -5,9 +5,6 @@ setlocal enabledelayedexpansion
 ::  Generates relocatable .bat wrappers for all console_scripts
 ::  entry points found in the portable Python's site-packages.
 ::
-::  Run this after moving or renaming the root folder to create
-::  alternative .bat shims for broken .exe shims.
-::
 ::  Usage: portable-bat-launcher-creator.bat [/nopause]
 :: ============================================================
 
