@@ -91,23 +91,31 @@ def replace_with_portable_exes_in_scripts(verbose=False):
             if verbose:
                 print(f"  [OK]   Replacing -> Scripts\\{exe_name}.exe")
 
+            # callable_ may be dotted e.g. "main" or "app.run"
+            # Split into the importable name and any attribute chain
+            callable_parts = callable_.split(".")
+            import_name = callable_parts[0]
+            attr_chain = callable_parts[1:]
+
+            if attr_chain:
+                call_expr = ".".join([import_name] + attr_chain) + "()"
+                import_line = f"from {module} import {import_name}"
+            else:
+                call_expr = f"{import_name}()"
+                import_line = f"from {module} import {import_name}"
+
             script_content = (
-                f"# -*- coding: utf-8 -*-\n"
-                f"import sys, functools, importlib\n"
-                f"\n"
-                f"def main():\n"
-                f"    sys.argv[0] = '{exe_name}'\n"
-                f"    m = importlib.import_module('{module}')\n"
-                f"    sys.exit(functools.reduce(getattr, '{callable_}'.split('.'), m)())\n"
-                f"\n"
-                f"main()\n"
+                f"import sys\n"
+                f"{import_line}\n"
+                f"if __name__ == '__main__':\n"
+                f"    sys.argv[0] = sys.argv[0].removesuffix('.exe')\n"
+                f"    sys.exit({call_expr})\n"
             )
 
             try:
                 with open(stub_path, "rb") as f:
                     stub_bytes = f.read()
 
-                # shebang = b"#!python.exe\n" + PORTABLE_MARKER
                 shebang = b"#!<launcher_dir>\\..\\python.exe\n" + PORTABLE_MARKER
                 script_bytes = script_content.encode("utf-8")
 
