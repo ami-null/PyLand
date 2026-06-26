@@ -24,7 +24,7 @@ echo [OK]   Found Python: %PYTHON_EXE%
 "%PYTHON_EXE%" "%HELPER%"
 if errorlevel 1 (
     echo.
-    echo [ERROR] Shim generation encountered errors. See output above.
+    echo [ERROR] Portable exe generation encountered errors. See output above.
     goto :error
 )
 
