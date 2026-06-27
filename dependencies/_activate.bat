@@ -1,6 +1,6 @@
 @echo off
 :: Shared environment activation for launcher scripts.
-:: Do NOT add setlocal here — callers own their own scope.
+:: Do NOT add setlocal here - callers own their own scope.
 :: Must be called AFTER _config.bat, as it depends on vars set there.
 
 set UV_LINK_MODE=copy
