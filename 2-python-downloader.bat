@@ -35,7 +35,8 @@ if exist "%PYTHON_DIR%" (
 
 :: Interactive version selection
 echo.
-set /p "PY_VER=Enter Python version (e.g., 3.12, 3.11, or leave empty for latest): "
+REM set /p "PY_VER=Enter Python version (e.g., 3.12, 3.11, or leave empty for latest): "
+for /f "usebackq tokens=*" %%V in ("%~dp0python-version.txt") do set "PY_VER=%%V"
 
 mkdir "%PYTHON_DIR%"
 mkdir "%INSTALL_TEMP%"
