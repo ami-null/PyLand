@@ -13,7 +13,7 @@ set UV_PYTHON_INSTALL_REGISTRY=0
 
 :: Check if uv exists
 if not exist "%UV_EXE%" (
-    echo ERROR: uv.exe not found. Run 1-uv-downloader.bat first.
+    echo ERROR: uv.exe not found. Run 1_update-uv.bat first.
     endlocal
     if /i "%~1" neq "/nopause" pause
     exit /b 1

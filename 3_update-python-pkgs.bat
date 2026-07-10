@@ -11,7 +11,7 @@ echo Installing Python packages...
 
 :: Validation
 if not exist "%UV_EXE%" (
-    echo ERROR: uv.exe not found. Run 1-uv-downloader.bat first.
+    echo ERROR: uv.exe not found. Run 1_update-uv.bat first.
     endlocal
     if /i "%~1" neq "/nopause" pause
     exit /b 1
@@ -19,7 +19,7 @@ if not exist "%UV_EXE%" (
 
 if not exist "%PYTHON_EXE%" (
     echo ERROR: python.exe not found in "%ROOT_DIR%\python".
-    echo Run 2-python-downloader.bat first.
+    echo Run 2_update-python.bat first.
     endlocal
     if /i "%~1" neq "/nopause" pause
     exit /b 1
