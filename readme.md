@@ -2,7 +2,7 @@
 
 A modular, self-contained development environment designed to run in complete isolation from your system Python. No admin rights required, no system-wide installations, and zero footprint on the host machine. Does not make any permanent changes to system environment variables or Windows registry.
 
-This project was **vibe coded using Gemini**.
+This project was **vibe coded using Gemini and Claude**.
 
 ---
 
@@ -21,11 +21,15 @@ This project was **vibe coded using Gemini**.
 ## How to Use
 
 ### 1. Build the Environment
-Run the scripts in order to initialize the isolated Python environment:
+**`0_first-time-setup_RUN-ONLY-ONCE.bat`**: Runs the three setup scripts below in order. This is meant to be run only once, when first setting up the environment. Re-running it (e.g. to fetch a newer `uv` or reinstall Python) will prompt you before overwriting anything that already exists.
 
-1.  **`1-uv-downloader.bat`**: Fetches the latest `uv` binary from GitHub.
-2.  **`2-python-downloader.bat`**: Downloads a standalone Python distribution via `uv`. You will be prompted to choose a version (e.g., `3.12`).
-3.  **`3-python-pkgs-installer.bat`**: Installs the packages in `requirements.txt` using `uv pip`.
+Alternatively, run the scripts individually in order to initialize the isolated Python environment:
+
+1.  **`1_update-uv.bat`**: Fetches the latest `uv` binary from GitHub.
+2.  **`2_update-python.bat`**: Downloads a standalone Python distribution via `uv`. You will be prompted to choose a version (e.g., `3.12`).
+3.  **`3_update-python-pkgs.bat`**: Installs the packages in `requirements.txt` using `uv pip`.
+
+The above three scripts can also be executed individually to update the components of this portable Python environment.
 <!-- 4.  **`4-bat-shim-creator.bat`**: Various Python packages install `.exe` entry points in the `Scripts` directory of the Python installation. The `4-bat-shim-creator.bat` creates `.bat` shims for those `.exe` files. This is optional but useful when the whole environment is moved around. Because the `.exe` files hardcode the location of the Python executable at install time of the Python packages, this leads to broken executables when the environment is moved or renamed. The generated `.bat` scripts do not hardcode the location of the Python executable, so these `.bat` files do not fail to launch even when the environment is moved or renamed. -->
 
 ### 2. Launch
