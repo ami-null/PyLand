@@ -2,7 +2,7 @@
 
 A modular, self-contained development environment designed to run in complete isolation from your system Python. No admin rights required, no system-wide installations, and zero footprint on the host machine. Does not make any permanent changes to system environment variables or Windows registry.
 
-This project was **vibe coded using Gemini and Claude**.
+Some of the scripts were **vibe coded using LLMs**.
 
 ---
 
@@ -35,6 +35,10 @@ The above three scripts can also be executed individually to update the componen
 ### 2. Launch
 * **`open-cmd.bat`**: Sets a temporary and isolated PATH and other environment variables necessary to make the environment isolated from the rest of the system, then launches Windows Command Prompt in which the `uv` and `python` commands are availabale.
 * **`open-jupyterlab.bat`**: Sets a temporary and isolated PATH and other environment variables necessary to make the environment isolated from the rest of the system, then launches **Jupyter Lab**. All configuration and runtime data stay within the local folder.
+
+
+### 3. Maintenance (Optional)
+* **`portable-exe-launcher-creator.bat`**: Regenerates relocatable `.exe` wrappers for every console-script entry point installed in the portable Python's `site-packages` (e.g. `jupyter.exe`, `pip.exe`). This runs automatically after every `!pip install`, so you normally don't need to run it yourself. Run it manually if you ever need to re-patch the executables without reinstalling any packages, or if you installed a package using `uv pip install...` instead of `pip install...`.
 
 ---
 
